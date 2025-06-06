@@ -1,0 +1,136 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container py-4">
+    <div class="row">
+        <!-- Left Sidebar -->
+        <div class="col-lg-3 mb-4">
+            <div class="card">
+                <div class="card-body text-center">
+                    <div class="position-relative mb-3">
+                        <img src="https://images.unsplash.com/photo-1557804506-669a67965ba0?w=400&h=200&fit=crop" 
+                             alt="Cover" class="card-img-top" style="height: 80px; object-fit: cover;">
+                        <div class="position-absolute top-100 start-50 translate-middle">
+                            <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=80&h=80&fit=crop&crop=face" 
+                                 alt="Profile" class="rounded-circle border border-3 border-white" 
+                                 style="width: 60px; height: 60px; object-fit: cover;">
+                        </div>
+                    </div>
+                    <div class="mt-4">
+                        <h6 class="mb-1">{{ current_user.first_name }} {{ current_user.last_name }}</h6>
+                        <p class="text-muted small mb-2">{{ current_user.headline or "Professional" }}</p>
+                        <a href="/my-profile" class="btn btn-outline-primary btn-sm">View Profile</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="col-lg-6">
+            <!-- Create Post -->
+            <div class="card mb-4">
+                <div class="card-body">
+                    <form action="/posts/create" method="post">
+                        <div class="d-flex align-items-center mb-3">
+                            <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=40&h=40&fit=crop&crop=face" 
+                                 alt="Profile" class="rounded-circle me-3" style="width: 40px; height: 40px; object-fit: cover;">
+                            <textarea class="form-control border-0 resize-none" name="content" 
+                                    placeholder="What's on your mind?" rows="3" required></textarea>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="d-flex gap-3">
+                                <button type="button" class="btn btn-link text-muted p-0">
+                                    <i class="bi bi-image"></i> Photo
+                                </button>
+                                <button type="button" class="btn btn-link text-muted p-0">
+                                    <i class="bi bi-play-circle"></i> Video
+                                </button>
+                                <button type="button" class="btn btn-link text-muted p-0">
+                                    <i class="bi bi-calendar-event"></i> Event
+                                </button>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Post</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Posts Feed -->
+            {% for post in posts %}
+            <div class="card mb-4">
+                <div class="card-body">
+                    <div class="d-flex align-items-center mb-3">
+                        <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=50&h=50&fit=crop&crop=face" 
+                             alt="Profile" class="rounded-circle me-3" style="width: 50px; height: 50px; object-fit: cover;">
+                        <div>
+                            <h6 class="mb-0">
+                                <a href="/profile/{{ post.author.id }}" class="text-decoration-none">
+                                    {{ post.author.first_name }} {{ post.author.last_name }}
+                                </a>
+                            </h6>
+                            <small class="text-muted">{{ post.author.headline or "Professional" }}</small>
+                            <br>
+                            <small class="text-muted">{{ post.created_at.strftime('%B %d, %Y') }}</small>
+                        </div>
+                    </div>
+                    
+                    <p class="mb-3">{{ post.content }}</p>
+                    
+                    <div class="d-flex justify-content-between align-items-center border-top pt-3">
+                        <button class="btn btn-link text-muted p-0">
+                            <i class="bi bi-hand-thumbs-up"></i> Like
+                        </button>
+                        <button class="btn btn-link text-muted p-0">
+                            <i class="bi bi-chat"></i> Comment
+                        </button>
+                        <button class="btn btn-link text-muted p-0">
+                            <i class="bi bi-share"></i> Share
+                        </button>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+            
+            {% if not posts %}
+            <div class="card">
+                <div class="card-body text-center py-5">
+                    <i class="bi bi-chat-square-text text-muted display-4 mb-3"></i>
+                    <h5 class="text-muted">No posts yet</h5>
+                    <p class="text-muted">Start following people to see their posts in your feed.</p>
+                    <a href="/network" class="btn btn-primary">Find People</a>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+
+        <!-- Right Sidebar -->
+        <div class="col-lg-3">
+            <div class="card">
+                <div class="card-header">
+                    <h6 class="mb-0">LinkedIn News</h6>
+                </div>
+                <div class="card-body">
+                    <div class="mb-3">
+                        <a href="#" class="text-decoration-none">
+                            <h6 class="mb-1">Tech industry trends</h6>
+                            <small class="text-muted">2 hours ago • 1,234 readers</small>
+                        </a>
+                    </div>
+                    <div class="mb-3">
+                        <a href="#" class="text-decoration-none">
+                            <h6 class="mb-1">Remote work insights</h6>
+                            <small class="text-muted">5 hours ago • 856 readers</small>
+                        </a>
+                    </div>
+                    <div class="mb-3">
+                        <a href="#" class="text-decoration-none">
+                            <h6 class="mb-1">Career development tips</h6>
+                            <small class="text-muted">1 day ago • 2,341 readers</small>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
