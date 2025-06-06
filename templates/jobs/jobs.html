@@ -1,0 +1,161 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container py-4">
+    <div class="row">
+        <div class="col-12 mb-4">
+            <h2>Jobs</h2>
+            <p class="text-muted">Discover your next career opportunity</p>
+        </div>
+        
+        <!-- Job Search -->
+        <div class="col-12 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <form class="row g-3">
+                        <div class="col-md-4">
+                            <input type="text" class="form-control" placeholder="Job title or keyword">
+                        </div>
+                        <div class="col-md-4">
+                            <input type="text" class="form-control" placeholder="Location">
+                        </div>
+                        <div class="col-md-4">
+                            <button type="submit" class="btn btn-primary w-100">
+                                <i class="bi bi-search"></i> Search Jobs
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Job Listings -->
+        <div class="col-lg-8">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">Recommended for you</h5>
+                </div>
+                <div class="card-body">
+                    <!-- Sample Job 1 -->
+                    <div class="border-bottom pb-3 mb-3">
+                        <div class="d-flex align-items-start">
+                            <img src="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=60&h=60&fit=crop" 
+                                 alt="Company" class="rounded me-3" style="width: 60px; height: 60px; object-fit: cover;">
+                            <div class="flex-grow-1">
+                                <h6 class="mb-1">Senior Software Engineer</h6>
+                                <p class="text-primary mb-1">TechCorp Inc.</p>
+                                <p class="text-muted mb-2">San Francisco, CA • Remote</p>
+                                <p class="mb-2">Join our team to build cutting-edge software solutions...</p>
+                                <div class="d-flex gap-2 mb-2">
+                                    <span class="badge bg-light text-dark">Full-time</span>
+                                    <span class="badge bg-light text-dark">Remote</span>
+                                    <span class="badge bg-light text-dark">$120k-$180k</span>
+                                </div>
+                                <small class="text-muted">Posted 2 days ago</small>
+                            </div>
+                            <button class="btn btn-outline-primary">Apply</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Sample Job 2 -->
+                    <div class="border-bottom pb-3 mb-3">
+                        <div class="d-flex align-items-start">
+                            <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=60&h=60&fit=crop" 
+                                 alt="Company" class="rounded me-3" style="width: 60px; height: 60px; object-fit: cover;">
+                            <div class="flex-grow-1">
+                                <h6 class="mb-1">Product Manager</h6>
+                                <p class="text-primary mb-1">Innovation Labs</p>
+                                <p class="text-muted mb-2">New York, NY • Hybrid</p>
+                                <p class="mb-2">Lead product strategy and development for our flagship products...</p>
+                                <div class="d-flex gap-2 mb-2">
+                                    <span class="badge bg-light text-dark">Full-time</span>
+                                    <span class="badge bg-light text-dark">Hybrid</span>
+                                    <span class="badge bg-light text-dark">$100k-$150k</span>
+                                </div>
+                                <small class="text-muted">Posted 1 week ago</small>
+                            </div>
+                            <button class="btn btn-outline-primary">Apply</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Sample Job 3 -->
+                    <div class="pb-3">
+                        <div class="d-flex align-items-start">
+                            <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=60&h=60&fit=crop" 
+                                 alt="Company" class="rounded me-3" style="width: 60px; height: 60px; object-fit: cover;">
+                            <div class="flex-grow-1">
+                                <h6 class="mb-1">UX Designer</h6>
+                                <p class="text-primary mb-1">Design Studio</p>
+                                <p class="text-muted mb-2">Los Angeles, CA • On-site</p>
+                                <p class="mb-2">Create beautiful and intuitive user experiences...</p>
+                                <div class="d-flex gap-2 mb-2">
+                                    <span class="badge bg-light text-dark">Full-time</span>
+                                    <span class="badge bg-light text-dark">On-site</span>
+                                    <span class="badge bg-light text-dark">$80k-$120k</span>
+                                </div>
+                                <small class="text-muted">Posted 3 days ago</small>
+                            </div>
+                            <button class="btn btn-outline-primary">Apply</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Job Filters -->
+        <div class="col-lg-4">
+            <div class="card">
+                <div class="card-header">
+                    <h6 class="mb-0">Filter Jobs</h6>
+                </div>
+                <div class="card-body">
+                    <div class="mb-3">
+                        <label class="form-label">Job Type</label>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="fulltime">
+                            <label class="form-check-label" for="fulltime">Full-time</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="parttime">
+                            <label class="form-check-label" for="parttime">Part-time</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="contract">
+                            <label class="form-check-label" for="contract">Contract</label>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label">Work Location</label>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="remote">
+                            <label class="form-check-label" for="remote">Remote</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="hybrid">
+                            <label class="form-check-label" for="hybrid">Hybrid</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="onsite">
+                            <label class="form-check-label" for="onsite">On-site</label>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label">Experience Level</label>
+                        <select class="form-select">
+                            <option>Any</option>
+                            <option>Entry level</option>
+                            <option>Mid level</option>
+                            <option>Senior level</option>
+                            <option>Executive</option>
+                        </select>
+                    </div>
+                    
+                    <button class="btn btn-primary w-100">Apply Filters</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
