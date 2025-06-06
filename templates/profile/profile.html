@@ -1,0 +1,179 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container py-4">
+    <div class="row">
+        <!-- Profile Header -->
+        <div class="col-12 mb-4">
+            <div class="card">
+                <div class="position-relative">
+                    <img src="https://images.unsplash.com/photo-1557804506-669a67965ba0?w=1200&h=300&fit=crop" 
+                         alt="Cover" class="card-img-top" style="height: 200px; object-fit: cover;">
+                    <div class="position-absolute bottom-0 start-0 p-4">
+                        <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face" 
+                             alt="Profile" class="rounded-circle border border-4 border-white" 
+                             style="width: 150px; height: 150px; object-fit: cover;">
+                    </div>
+                </div>
+                
+                <div class="card-body pt-5">
+                    <div class="row">
+                        <div class="col-lg-8">
+                            <h2 class="mb-1">{{ profile_user.first_name }} {{ profile_user.last_name }}</h2>
+                            <p class="text-muted mb-2">{{ profile_user.headline or "Professional" }}</p>
+                            <p class="text-muted mb-3">
+                                <i class="bi bi-geo-alt"></i> {{ profile_user.location or "Location not specified" }}
+                            </p>
+                            
+                            {% if current_user and current_user.id != profile_user.id %}
+                            <div class="d-flex gap-2">
+                                {% if is_connected %}
+                                <button class="btn btn-outline-primary" disabled>
+                                    <i class="bi bi-check-circle"></i> Connected
+                                </button>
+                                {% elif connection_pending %}
+                                <button class="btn btn-outline-secondary" disabled>
+                                    <i class="bi bi-clock"></i> Pending
+                                </button>
+                                {% else %}
+                                <form action="/connections/send/{{ profile_user.id }}" method="post" class="d-inline">
+                                    <button type="submit" class="btn btn-primary">
+                                        <i class="bi bi-person-plus"></i> Connect
+                                    </button>
+                                </form>
+                                {% endif %}
+                                <button class="btn btn-outline-primary">
+                                    <i class="bi bi-envelope"></i> Message
+                                </button>
+                            </div>
+                            {% endif %}
+                        </div>
+                        
+                        <div class="col-lg-4 text-lg-end">
+                            <div class="d-flex justify-content-lg-end gap-3">
+                                <div class="text-center">
+                                    <h5 class="mb-0">{{ posts|length }}</h5>
+                                    <small class="text-muted">Posts</small>
+                                </div>
+                                <div class="text-center">
+                                    <h5 class="mb-0">500+</h5>
+                                    <small class="text-muted">Connections</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Profile Content -->
+        <div class="col-lg-8">
+            <!-- About Section -->
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">About</h5>
+                    <p class="card-text">
+                        {{ profile_user.summary or "This user hasn't added a summary yet." }}
+                    </p>
+                </div>
+            </div>
+            
+            <!-- Posts Section -->
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">Posts</h5>
+                </div>
+                <div class="card-body">
+                    {% for post in posts %}
+                    <div class="border-bottom pb-3 mb-3">
+                        <div class="d-flex align-items-center mb-2">
+                            <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=40&h=40&fit=crop&crop=face" 
+                                 alt="Profile" class="rounded-circle me-3" style="width: 40px; height: 40px; object-fit: cover;">
+                            <div>
+                                <h6 class="mb-0">{{ post.author.first_name }} {{ post.author.last_name }}</h6>
+                                <small class="text-muted">{{ post.created_at.strftime('%B %d, %Y') }}</small>
+                            </div>
+                        </div>
+                        <p class="mb-2">{{ post.content }}</p>
+                        <div class="d-flex gap-3">
+                            <button class="btn btn-link text-muted p-0 small">
+                                <i class="bi bi-hand-thumbs-up"></i> Like
+                            </button>
+                            <button class="btn btn-link text-muted p-0 small">
+                                <i class="bi bi-chat"></i> Comment
+                            </button>
+                            <button class="btn btn-link text-muted p-0 small">
+                                <i class="bi bi-share"></i> Share
+                            </button>
+                        </div>
+                    </div>
+                    {% endfor %}
+                    
+                    {% if not posts %}
+                    <div class="text-center py-4">
+                        <i class="bi bi-chat-square-text text-muted display-4 mb-3"></i>
+                        <h6 class="text-muted">No posts yet</h6>
+                        <p class="text-muted">{{ profile_user.first_name }} hasn't shared any posts.</p>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        
+        <!-- Sidebar -->
+        <div class="col-lg-4">
+            <!-- People Also Viewed -->
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h6 class="mb-0">People also viewed</h6>
+                </div>
+                <div class="card-body">
+                    <div class="d-flex align-items-center mb-3">
+                        <img src="https://images.unsplash.com/photo-1494790108755-2616b612b786?w=50&h=50&fit=crop&crop=face" 
+                             alt="Profile" class="rounded-circle me-3" style="width: 50px; height: 50px; object-fit: cover;">
+                        <div>
+                            <h6 class="mb-0">Sarah Johnson</h6>
+                            <small class="text-muted">Product Manager</small>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-center mb-3">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=50&h=50&fit=crop&crop=face" 
+                             alt="Profile" class="rounded-circle me-3" style="width: 50px; height: 50px; object-fit: cover;">
+                        <div>
+                            <h6 class="mb-0">Mike Chen</h6>
+                            <small class="text-muted">Software Engineer</small>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-center">
+                        <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=50&h=50&fit=crop&crop=face" 
+                             alt="Profile" class="rounded-circle me-3" style="width: 50px; height: 50px; object-fit: cover;">
+                        <div>
+                            <h6 class="mb-0">Emily Davis</h6>
+                            <small class="text-muted">UX Designer</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Contact Info -->
+            <div class="card">
+                <div class="card-header">
+                    <h6 class="mb-0">Contact Info</h6>
+                </div>
+                <div class="card-body">
+                    <div class="mb-2">
+                        <i class="bi bi-envelope text-muted me-2"></i>
+                        <span>{{ profile_user.email }}</span>
+                    </div>
+                    {% if profile_user.location %}
+                    <div class="mb-2">
+                        <i class="bi bi-geo-alt text-muted me-2"></i>
+                        <span>{{ profile_user.location }}</span>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
