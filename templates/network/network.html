@@ -1,0 +1,120 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container py-4">
+    <div class="row">
+        <div class="col-12 mb-4">
+            <h2>My Network</h2>
+            <p class="text-muted">Manage your professional relationships</p>
+        </div>
+        
+        <!-- Network Stats -->
+        <div class="col-12 mb-4">
+            <div class="row">
+                <div class="col-md-4 mb-3">
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <h3 class="text-primary">{{ connections|length }}</h3>
+                            <p class="mb-0">Connections</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <h3 class="text-info">{{ suggested|length }}</h3>
+                            <p class="mb-0">People you may know</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <h3 class="text-success">0</h3>
+                            <p class="mb-0">Pending invitations</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- People You May Know -->
+        <div class="col-lg-8 mb-4">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">People you may know</h5>
+                </div>
+                <div class="card-body">
+                    {% if suggested %}
+                    <div class="row">
+                        {% for user in suggested %}
+                        <div class="col-md-6 mb-3">
+                            <div class="card">
+                                <div class="card-body text-center">
+                                    <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=80&h=80&fit=crop&crop=face" 
+                                         alt="Profile" class="rounded-circle mb-3" style="width: 80px; height: 80px; object-fit: cover;">
+                                    <h6 class="mb-1">
+                                        <a href="/profile/{{ user.id }}" class="text-decoration-none">
+                                            {{ user.first_name }} {{ user.last_name }}
+                                        </a>
+                                    </h6>
+                                    <p class="text-muted small mb-3">{{ user.headline or "Professional" }}</p>
+                                    <form action="/connections/send/{{ user.id }}" method="post">
+                                        <button type="submit" class="btn btn-outline-primary btn-sm">
+                                            <i class="bi bi-person-plus"></i> Connect
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    {% else %}
+                    <div class="text-center py-4">
+                        <i class="bi bi-people text-muted display-4 mb-3"></i>
+                        <h6 class="text-muted">No suggestions available</h6>
+                        <p class="text-muted">Check back later for new connection suggestions.</p>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        
+        <!-- Your Connections -->
+        <div class="col-lg-4">
+            <div class="card">
+                <div class="card-header">
+                    <h6 class="mb-0">Your connections</h6>
+                </div>
+                <div class="card-body">
+                    {% if connections %}
+                    {% for connection in connections %}
+                    <div class="d-flex align-items-center mb-3">
+                        <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=50&h=50&fit=crop&crop=face" 
+                             alt="Profile" class="rounded-circle me-3" style="width: 50px; height: 50px; object-fit: cover;">
+                        <div class="flex-grow-1">
+                            <h6 class="mb-0">
+                                <a href="/profile/{{ connection.id }}" class="text-decoration-none">
+                                    {{ connection.first_name }} {{ connection.last_name }}
+                                </a>
+                            </h6>
+                            <small class="text-muted">{{ connection.headline or "Professional" }}</small>
+                        </div>
+                        <button class="btn btn-outline-primary btn-sm">
+                            <i class="bi bi-envelope"></i>
+                        </button>
+                    </div>
+                    {% endfor %}
+                    {% else %}
+                    <div class="text-center py-4">
+                        <i class="bi bi-person-plus text-muted display-4 mb-3"></i>
+                        <h6 class="text-muted">No connections yet</h6>
+                        <p class="text-muted">Start connecting with professionals in your field.</p>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
