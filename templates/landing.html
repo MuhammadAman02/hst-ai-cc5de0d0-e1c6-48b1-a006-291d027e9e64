@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero-section bg-light py-5">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6">
+                <h1 class="display-4 fw-bold text-primary mb-4">
+                    Welcome to the professional community
+                </h1>
+                <p class="lead mb-4">
+                    Connect with professionals, discover opportunities, and build your career.
+                </p>
+                <div class="d-grid gap-2 d-md-flex">
+                    <a href="/register" class="btn btn-primary btn-lg px-4">Join Now</a>
+                    <a href="/login" class="btn btn-outline-primary btn-lg px-4">Sign In</a>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=600&h=400&fit=crop&crop=faces" 
+                     alt="Professional networking" class="img-fluid rounded shadow">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Features Section -->
+<section class="py-5">
+    <div class="container">
+        <div class="row text-center">
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-body p-4">
+                        <i class="bi bi-people-fill text-primary display-4 mb-3"></i>
+                        <h5 class="card-title">Connect</h5>
+                        <p class="card-text">Build your professional network and stay connected with colleagues.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-body p-4">
+                        <i class="bi bi-briefcase-fill text-primary display-4 mb-3"></i>
+                        <h5 class="card-title">Discover</h5>
+                        <p class="card-text">Find job opportunities and advance your career with our platform.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-body p-4">
+                        <i class="bi bi-chat-square-text-fill text-primary display-4 mb-3"></i>
+                        <h5 class="card-title">Share</h5>
+                        <p class="card-text">Share your insights and engage with professional content.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="bg-primary text-white py-5">
+    <div class="container text-center">
+        <h2 class="mb-4">Ready to get started?</h2>
+        <p class="lead mb-4">Join millions of professionals already on LinkedIn Clone</p>
+        <a href="/register" class="btn btn-light btn-lg px-5">Join Now - It's Free</a>
+    </div>
+</section>
+{% endblock %}
